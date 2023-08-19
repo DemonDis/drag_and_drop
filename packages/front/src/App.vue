@@ -1,49 +1,71 @@
-<script list="ts">
-import { ref } from 'vue'
+<script lang="ts">
+// import { ref } from 'vue'
+import axios from 'axios'
 
   export default {
-    setup() {
-      const items = ref([
-          {
-            id: 0,
-            title: 'Item A',
-            list: 1,
-          },
-          {
-            id: 1,
-            title: 'Item B',
-            list: 2,
-          },
-          {
-            id: 2,
-            title: 'Item C',
-            list: 3,
-          },
-      ])
-      const getList = (list) => {
-        return items.value.filter((item) => item.list == list)
-      }
-      const startDrag = (event, item) => {
-        event.dataTransfer.dropEffect = 'move'
-        event.dataTransfer.effectAllowed = 'move'
-        event.dataTransfer.setData('itemID', item.id)
-      }
-      const onDrop = (event, list) => {
-        const itemID = event.dataTransfer.getData('itemID')
-        const item = items.value.find((item) => item.id == itemID)
-        item.list = list
-      }
-      return {
-        getList,
-        startDrag,
-        onDrop
+    // setup() {
+    //   const items = ref([
+    //       {
+    //         id: 0,
+    //         title: 'Item A',
+    //         list: 1,
+    //       },
+    //       {
+    //         id: 1,
+    //         title: 'Item B',
+    //         list: 2,
+    //       },
+    //       {
+    //         id: 2,
+    //         title: 'Item C',
+    //         list: 3,
+    //       },
+    //   ])
+    //   const getList = (list) => {
+    //     return items.value.filter((item) => item.list == list)
+    //   }
+    //   const startDrag = (event, item) => {
+    //     event.dataTransfer.dropEffect = 'move'
+    //     event.dataTransfer.effectAllowed = 'move'
+    //     event.dataTransfer.setData('itemID', item.id)
+    //   }
+    //   const onDrop = (event, list) => {
+    //     const itemID = event.dataTransfer.getData('itemID')
+    //     const item = items.value.find((item) => item.id == itemID)
+    //     item.list = list
+    //   }
+    //   return {
+    //     getList,
+    //     startDrag,
+    //     onDrop
+    //   }
+    // },
+    methods: {
+      btn() {
+        axios.post("http://localhost:3000/user", {
+            name: 'Adam',
+            surname: 'Smith'
+          })
+          .then((response: any) => {
+            console.log(response);
+          });
+      },
+      btnGET() {
+        axios.get("http://localhost:3000/user")
+          .then((response: any) => {
+            console.log(response);
+          });
       }
     }
   }
 </script>
 
 <template>
-    <div
+  <div>
+    <button @click="btn()">CLICK</button>
+    <button @click="btnGET()">GET ALL</button>
+  </div>
+    <!-- <div
       class="drop-zone"
       @drop="onDrop($event, 1)"
       @dragover.prevent
@@ -58,8 +80,8 @@ import { ref } from 'vue'
       >
         {{ item.title }}
       </div>
-    </div>
-    <div
+      </div> -->
+    <!-- <div
       class="drop-zone"
       @drop="onDrop($event, 2)"
       @dragover.prevent
@@ -74,7 +96,7 @@ import { ref } from 'vue'
       >
         {{ item.title }}
       </div>
-    </div>
+    </div> -->
   
 </template>
 
