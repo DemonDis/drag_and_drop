@@ -48,14 +48,15 @@ import axios from 'axios'
         axios.post("http://localhost:3000/post", {
             title: 'for Adam',
             content: 'fot S',
-            user_id: 4
+            user_id: 1
           })
           .then((response: any) => {
             console.log(response);
           });
       },
       btnGetIdPost(){
-        axios.get("http://localhost:3000/post/4")
+        const postId = 1;
+        axios.get(`http://localhost:3000/post/${postId}`)
           .then((response: any) => {
             console.log(response);
           });
