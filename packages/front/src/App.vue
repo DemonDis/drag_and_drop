@@ -1,26 +1,30 @@
-<script lang="ts">
+<script lang="js">
 import axios from 'axios'
+import DragAndDrop from './components/DragAndDrop.vue'
 
   export default {
+    components: {
+      DragAndDrop
+    },
     methods: {
       btn() {
         axios.post("http://localhost:3000/user", {
             name: 'Adam',
             surname: 'Smith'
           })
-          .then((response: any) => {
+          .then((response) => {
             console.log(response);
           });
       },
       btnGET() {
         axios.get("http://localhost:3000/user")
-          .then((response: any) => {
+          .then((response) => {
             console.log(response);
           });
       },
       btnGETId() {
         axios.get("http://localhost:3000/user/1")
-          .then((response: any) => {
+          .then((response) => {
             console.log(response);
           });
       },
@@ -30,7 +34,7 @@ import axios from 'axios'
             name: 'AdamS',
             surname: 'Smith 2'
           })
-          .then((response: any) => {
+          .then((response) => {
             console.log(response);
           });
       },
@@ -50,20 +54,20 @@ import axios from 'axios'
             content: 'fot S',
             user_id: 1
           })
-          .then((response: any) => {
+          .then((response) => {
             console.log(response);
           });
       },
       btnGetIdPost(){
         const postId = 1;
         axios.get(`http://localhost:3000/post/${postId}`)
-          .then((response: any) => {
+          .then((response) => {
             console.log(response);
           });
       },
       btnGetAllPost(){
         axios.get("http://localhost:3000/post")
-          .then((response: any) => {
+          .then((response) => {
             console.log(response);
           });
       }
@@ -82,7 +86,8 @@ import axios from 'axios'
     <button @click="btnPostCREAT()">Create post</button>
     <button @click="btnGetIdPost()">Get id post</button>
     <button @click="btnGetAllPost()">Get ALL post</button>
-  </div>
+    <DragAndDrop/>
+</div>
 </template>
 
 <style scoped>
