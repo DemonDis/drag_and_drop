@@ -9,7 +9,7 @@ import DragAndDrop from './components/DragAndDrop.vue'
     methods: {
       btn() {
         axios.post("http://localhost:3000/user", {
-            name: 'Adam',
+            name: '4 Adam',
             surname: 'Smith'
           })
           .then((response) => {
@@ -31,8 +31,8 @@ import DragAndDrop from './components/DragAndDrop.vue'
       btnPUT() {
         axios.put("http://localhost:3000/user", {
             id: 1,
-            name: 'AdamS',
-            surname: 'Smith 2'
+            name: 'PERSONAL Main',
+            surname: 'Smith'
           })
           .then((response) => {
             console.log(response);
@@ -50,7 +50,7 @@ import DragAndDrop from './components/DragAndDrop.vue'
       },
       btnPostCREAT(){
         axios.post("http://localhost:3000/post", {
-            title: 'for Adam',
+            title: '3 POST',
             content: 'fot S',
             user_id: 1
           })
@@ -70,6 +70,12 @@ import DragAndDrop from './components/DragAndDrop.vue'
           .then((response) => {
             console.log(response);
           });
+      },
+      btnDellAllPost(){
+        axios.delete("http://localhost:3000/post")
+          .then((response) => {
+            console.log(response);
+          });
       }
     }
   }
@@ -86,6 +92,7 @@ import DragAndDrop from './components/DragAndDrop.vue'
     <button @click="btnPostCREAT()">Create post</button>
     <button @click="btnGetIdPost()">Get id post</button>
     <button @click="btnGetAllPost()">Get ALL post</button>
+    <button @click="btnDellAllPost()">DELL ALL post</button>
     <DragAndDrop/>
 </div>
 </template>

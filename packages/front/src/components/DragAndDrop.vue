@@ -2,7 +2,7 @@
   <div>
         <ul>
           <li v-for="item in users" :key="item.id">
-            <div @click="() => btnGetIdPost(item.id)">
+            <div @click="() => btnGetIdPost(item.id)" >
               {{item.id}} - {{item.name}} <button @click="btnDel(item.id)">DEl</button>
             </div>
           </li>
@@ -11,13 +11,15 @@
         <draggable
           :list="posts"
           group="people" 
-          @start="drag=true" 
+          @start="drag=false" 
           @end="drag=false" 
           item-key="id"
-          :move="checkMove"
+          :sort="true"
+          @change="log"
+          handle=".handle"
         >
           <template #item="{element}">
-            <div> {{element.id}} - {{element.title}} </div>
+            <div class="handle"> {{element.id}} - {{element.title}} </div>
           </template>
         </draggable>
 
@@ -48,8 +50,23 @@ export default {
     });
   },
   methods: {
-    checkMove: function(e) {
-      window.console.log("Future index: " + e.draggedContext.futureIndex);
+    log: function(evt) {
+      window.console.log(evt.moved, evt.moved.newIndex, evt.moved.element.id);
+      axios.put(`http://localhost:3000/post`, {
+          content: 'dd',
+          id: 100,
+          title: 'sss',
+          user_id: 1,
+        })
+        .then((response) => {
+          console.log(response.data);
+      })
+    },
+    
+    changePosition(e, e2) {
+      console.log('!!!!', e[e2].id)
+
+              
     },
     btnDel(id) {
       axios.delete(`http://localhost:3000/user/${id}`)
