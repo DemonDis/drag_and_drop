@@ -1,45 +1,7 @@
 <script lang="ts">
-// import { ref } from 'vue'
 import axios from 'axios'
 
   export default {
-    // setup() {
-    //   const items = ref([
-    //       {
-    //         id: 0,
-    //         title: 'Item A',
-    //         list: 1,
-    //       },
-    //       {
-    //         id: 1,
-    //         title: 'Item B',
-    //         list: 2,
-    //       },
-    //       {
-    //         id: 2,
-    //         title: 'Item C',
-    //         list: 3,
-    //       },
-    //   ])
-    //   const getList = (list) => {
-    //     return items.value.filter((item) => item.list == list)
-    //   }
-    //   const startDrag = (event, item) => {
-    //     event.dataTransfer.dropEffect = 'move'
-    //     event.dataTransfer.effectAllowed = 'move'
-    //     event.dataTransfer.setData('itemID', item.id)
-    //   }
-    //   const onDrop = (event, list) => {
-    //     const itemID = event.dataTransfer.getData('itemID')
-    //     const item = items.value.find((item) => item.id == itemID)
-    //     item.list = list
-    //   }
-    //   return {
-    //     getList,
-    //     startDrag,
-    //     onDrop
-    //   }
-    // },
     methods: {
       btn() {
         axios.post("http://localhost:3000/user", {
@@ -55,6 +17,54 @@ import axios from 'axios'
           .then((response: any) => {
             console.log(response);
           });
+      },
+      btnGETId() {
+        axios.get("http://localhost:3000/user/1")
+          .then((response: any) => {
+            console.log(response);
+          });
+      },
+      btnPUT() {
+        axios.put("http://localhost:3000/user", {
+            id: 1,
+            name: 'AdamS',
+            surname: 'Smith 2'
+          })
+          .then((response: any) => {
+            console.log(response);
+          });
+      },
+      btnDel() {
+        const postIdToDelete = 10;
+        axios.delete(`http://localhost:3000/user/${postIdToDelete}`)
+          .then(response => {
+            console.log(`Deleted post with ID ${postIdToDelete}`, response);
+          })
+          .catch(error => {
+            console.error(error);
+          });
+      },
+      btnPostCREAT(){
+        axios.post("http://localhost:3000/post", {
+            title: 'for Adam',
+            content: 'fot S',
+            user_id: 4
+          })
+          .then((response: any) => {
+            console.log(response);
+          });
+      },
+      btnGetIdPost(){
+        axios.get("http://localhost:3000/post/4")
+          .then((response: any) => {
+            console.log(response);
+          });
+      },
+      btnGetAllPost(){
+        axios.get("http://localhost:3000/post")
+          .then((response: any) => {
+            console.log(response);
+          });
       }
     }
   }
@@ -64,59 +74,16 @@ import axios from 'axios'
   <div>
     <button @click="btn()">CLICK</button>
     <button @click="btnGET()">GET ALL</button>
+    <button @click="btnGETId()">GET Id 1</button>
+    <button @click="btnPUT()">PUT</button>
+    <button @click="btnDel()">DEL</button>
+    <div></div>
+    <button @click="btnPostCREAT()">Create post</button>
+    <button @click="btnGetIdPost()">Get id post</button>
+    <button @click="btnGetAllPost()">Get ALL post</button>
   </div>
-    <!-- <div
-      class="drop-zone"
-      @drop="onDrop($event, 1)"
-      @dragover.prevent
-      @dragenter.prevent
-    >
-      <div 
-        class="drag-el"
-        v-for="item in getList(1)"
-        :key="item.id"
-        draggable="true"
-        @dragstart="startDrag($event, item)"
-      >
-        {{ item.title }}
-      </div>
-      </div> -->
-    <!-- <div
-      class="drop-zone"
-      @drop="onDrop($event, 2)"
-      @dragover.prevent
-      @dragenter.prevent
-    >
-      <div
-        class="drag-el"
-        v-for="item in getList(2)"
-        :key="item.id"
-        draggable="true"
-        @dragstart="startDrag($event, item)"
-      >
-        {{ item.title }}
-      </div>
-    </div> -->
-  
 </template>
 
 <style scoped>
-.drop-zone {
-  background-color: #eee;
-  margin-bottom: 10px;
-  padding: 10px;
-  /* width: 50px; */
-  /* margin: 50x auto; */
-  /* min-height: 10px; */
 
-}
-
-.drag-el {
-  background-color: #fff;
-  margin-bottom: 10px;
-  padding: 5px;
-}
-.drag-el:nth-last-of-type(1){
-  margin-bottom:0;
-}
 </style>
