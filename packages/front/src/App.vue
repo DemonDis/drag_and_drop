@@ -50,8 +50,9 @@ import DragAndDrop from './components/DragAndDrop.vue'
       },
       btnPostCREAT(){
         axios.post("http://localhost:3000/post", {
-            title: '3 POST',
+            title: '1-a',
             content: 'fot S',
+            id: 1,
             user_id: 1
           })
           .then((response) => {

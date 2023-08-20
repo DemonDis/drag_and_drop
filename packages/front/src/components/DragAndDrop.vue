@@ -51,12 +51,12 @@ export default {
   },
   methods: {
     log: function(evt) {
-      window.console.log(evt.moved, evt.moved.newIndex, evt.moved.element.id);
+      window.console.log(evt, evt.moved.newIndex, evt.moved.element.id);
       axios.put(`http://localhost:3000/post`, {
-          content: 'dd',
-          id: 100,
-          title: 'sss',
-          user_id: 1,
+          content: evt.moved.element.content,
+          id: evt.moved.newIndex+1,
+          title: evt.moved.element.title,
+          user_id: evt.moved.element.user_id,
         })
         .then((response) => {
           console.log(response.data);
