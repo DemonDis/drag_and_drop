@@ -50,23 +50,21 @@ export default {
     });
   },
   methods: {
-    log: function(evt) {
-      window.console.log(evt, evt.moved.newIndex, evt.moved.element.id);
-      axios.put(`http://localhost:3000/post`, {
-          content: evt.moved.element.content,
-          id: evt.moved.newIndex+1,
-          title: evt.moved.element.title,
-          user_id: evt.moved.element.user_id,
-        })
-        .then((response) => {
-          console.log(response.data);
+    log(evt) {
+      console.log('!!!! evt', evt.moved);
+      this.posts.map((item, index) => {
+        console.log('###', item.position, index+1)
+         return item.position != index+1 ? this.changePosition(item.id, index+1) : ''
       })
     },
-    
-    changePosition(e, e2) {
-      console.log('!!!!', e[e2].id)
-
-              
+    changePosition(id, position) {
+      axios.put(`http://localhost:3000/post`, {
+              position: position,
+              id: id,
+            })
+            .then((response) => {
+              console.log(response.data);
+          })
     },
     btnDel(id) {
       axios.delete(`http://localhost:3000/user/${id}`)

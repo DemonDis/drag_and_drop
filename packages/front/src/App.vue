@@ -30,7 +30,7 @@ import DragAndDrop from './components/DragAndDrop.vue'
       },
       btnPUT() {
         axios.put("http://localhost:3000/user", {
-            id: 1,
+            id: 2,
             name: 'PERSONAL Main',
             surname: 'Smith'
           })
@@ -50,8 +50,8 @@ import DragAndDrop from './components/DragAndDrop.vue'
       },
       btnPostCREAT(){
         axios.post("http://localhost:3000/post", {
-            title: '1-a',
-            content: 'fot S',
+            title: '2-a',
+            content: '2fot S',
             id: 1,
             user_id: 1
           })

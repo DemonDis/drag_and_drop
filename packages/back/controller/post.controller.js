@@ -8,18 +8,23 @@ class PostController {
     }
     async getPostsByUser(req, res) {
         const id = req.params.id
-        const posts = await db.query(`SELECT * FROM post WHERE user_id = $1 ORDER BY id ASC`, [id])
+        const posts = await db.query(`SELECT * FROM post WHERE user_id = $1 ORDER BY position ASC`, [id])
         res.json(posts.rows)
     }
     async getPostsAll(req, res) {
         const post = await db.query(`SELECT * FROM post`)
         res.json(post.rows)
     }
-    async updatePost(req, res) {
-      const {title, content, id, user_id} = req.body
-      const post = await db.query(`UPDATE post SET id = $1, title = $2, content = $3, user_id = $4 WHERE id = $1 RETURNING *`, [id, title, content, user_id])
+    async updatePostNewPostion(req, res) {
+      const {position, id} = req.body
+      const post = await db.query(`UPDATE post SET position = $1 WHERE id = $2`, [position, id])
       res.json(post.rows[0])
     }
+    // async updatePostPostion(req, res) {
+    //   const {position, id} = req.body
+    //   const post = await db.query(`UPDATE post SET position = $1 WHERE id = $2`, [position, id])
+    //   res.json(post.rows[0])
+    // }
     async deleteAllPost(req, res) {
       const posts = await db.query('DELETE FROM post')
       res.json(posts.rows)
